@@ -1,0 +1,20 @@
+body {
+  padding: 0px;
+  margin: 0px;
+
+}
+
+h4{
+  font-family:"Calibri Light";
+  color: cadetblue;
+  font-size: 18px;
+  text-align: center;
+}
+
+.table{
+  font-family:Arial;
+  font-size: 15px;
+}
+.jumbotronh1{
+  padding: 50px;
+}
