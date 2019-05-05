@@ -3,31 +3,39 @@ package br.com.fisioterapia.domain;
 //import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Date;
+import java.io.Serializable;
+import java.util.Calendar;
+
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "paciente")
-public class Paciente {
+public class Paciente  implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
+
+    @NotBlank
+    @Size(min = 2, max = 40)
+    @Column(nullable = false, length = 40)
+    private String nome;
 
     @NotBlank
     @Size(min = 2, max = 60)
-    @Column(nullable = false, length = 60)
-    private String paciente;
+    @Column(name = "plano_saude", nullable = false, length = 60)
+    private String planosaude;
 
-    @NotBlank
-    @Size(min = 2, max = 60)
-    @Column(nullable = false, length = 60)
-    private String planoSaude;
-
-    @Column
-    private Date dtNascimento;
+    @Column(name = "dt_nascimento")
+    @NotNull(message = "Informe a data de Nascimento")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Calendar dtNascimento;
 
 
     @Size(min = 2, max = 60)
@@ -44,48 +52,92 @@ public class Paciente {
     @Column(nullable = false, length = 60)
     private String diagnostico;
 
-    @ManyToOne
-    @JoinColumn(name = "agendamento")
-    private Agendamento agendamento;
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
+    private List<Agendamento> agendamentos;
 
 
-    public long getId() {
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getPaciente() {
-        return paciente;
+    public String getNome() {
+        return nome;
     }
 
-    public void setPaciente(String paciente) {
-        this.paciente = paciente;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getPlanoSaude() {
-        return planoSaude;
+    public String getPlanosaude() {
+        return planosaude;
     }
 
-    public void setPlanoSaude(String planoSaude) {
-        this.planoSaude = planoSaude;
+    public void setPlanosaude(String planosaude) {
+        this.planosaude = planosaude;
     }
 
-    public Date getDtNascimento() {
+    public Calendar getDtNascimento() {
         return dtNascimento;
     }
 
-    public void setDtNascimento(Date dtNascimento) {
+    public void setDtNascimento(Calendar dtNascimento) {
         this.dtNascimento = dtNascimento;
     }
 
-    public Agendamento getAgendamento() {
-        return agendamento;
+    public String getTelefone() {
+        return telefone;
     }
 
-    public void setAgendamento(Agendamento agendamento) {
-        this.agendamento = agendamento;
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getProfissao() {
+        return profissao;
+    }
+
+    public void setProfissao(String profissao) {
+        this.profissao = profissao;
+    }
+
+    public String getDiagnostico() {
+        return diagnostico;
+    }
+
+    public void setDiagnostico(String diagnostico) {
+        this.diagnostico = diagnostico;
+    }
+
+    public List<Agendamento> getAgendamentos() {
+        return agendamentos;
+    }
+
+    public void setAgendamentos(List<Agendamento> agendamentos) {
+        this.agendamentos = agendamentos;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Paciente)) return false;
+        Paciente paciente = (Paciente) o;
+        return Objects.equals(getId(), paciente.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
+
+    @Override
+    public String toString() {
+        return "Paciente{" +
+                "id=" + id +
+                '}';
     }
 }

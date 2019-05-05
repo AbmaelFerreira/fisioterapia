@@ -13,7 +13,6 @@ public interface AgendamentoDao {
     Agendamento recuperarPorID(long id);
 
     void atualizar(Agendamento agendamento);
-
     void excluir(long id);
 
 }

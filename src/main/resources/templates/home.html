@@ -1,28 +1,26 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html  lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no"/>
 
-    <head>
-        <meta charset="UTF-8"/>
-        <meta name="viewport" content="width=device-width, user-scalable=no"/>
 
-        <link href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
-        <link href="/css/style.css" rel="stylesheet"/>
-        <title>Sistema de Agendamento de Consulta por Pacientes</title>
-    </head>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}" />
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
+    <title>Agendamentos e Consulta por Paciente</title>
+</head>
 
     <body>
             <div class="container">
 
                 <div class="jumbotron">
-                    <h1>Fisioterapia Molina</h1>
+                    <h1>Fisioterapia Ronaldo Molina</h1>
                     <p class="lead">
                         Crie agendamento e avalie pacientes
                     </p>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-6">
-                    </div>
+
 
                     <div class="col-md-6">
                         <h3>Encontre agendamentos</h3>
@@ -31,10 +29,12 @@
                         </p>
 
                         <p>
+
                             <a class="btn btn-success" th:href="@{/agendamentos/listar}">Agendamentos</a>
                         </p>
                     </div>
-                </div>
+
+
 
                 <hr/>
 

@@ -1,6 +1,7 @@
 package br.com.fisioterapia.dao;
 
 import br.com.fisioterapia.domain.Agendamento;
+import br.com.fisioterapia.domain.Paciente;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -24,6 +25,7 @@ public class AgendamentoDaoImpl implements AgendamentoDao {
         return em.createQuery("select p from Agendamento p", Agendamento.class).getResultList();
 
     }
+
 
     @Override
     public Agendamento recuperarPorID(long id) {

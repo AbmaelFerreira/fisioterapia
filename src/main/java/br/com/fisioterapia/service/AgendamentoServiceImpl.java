@@ -29,6 +29,8 @@ public class AgendamentoServiceImpl implements AgendamentoService {
     }
 
 
+
+
     @Transactional(readOnly = true)
     public Agendamento recuperarPorID(long id) {
         return agendamentoDao.recuperarPorID(id);

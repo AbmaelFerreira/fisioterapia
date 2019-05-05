@@ -19,20 +19,20 @@ public class PacienteDaoImpl implements PacienteDao {
         em.persist(paciente);
     }
 
-    @Override
-    public List<Paciente> recuperarPorAgendamento(long agendamentoId) {
-        return em.createQuery("select m from Paciente m where m.agendamento.id = :agendamentoId", Paciente.class).setParameter("agendamentoId", agendamentoId)
-                .getResultList();
-    }
+//    @Override
+//    public List<Paciente> recuperarPorAgendamento(long agendamentoId) {
+//        return em.createQuery("select m from Paciente m where m.agendamento.id = :agendamentoId", Paciente.class).setParameter("agendamentoId", agendamentoId)
+//                .getResultList();
+//    }
 
-    @Override
-    public Paciente recuperarPorAgendamentoIdEPacienteId(long agendamentoId, long pacienteId) {
-        return em.createQuery("select m from Paciente m where m.agendamento.id = :agendamentoId and m.id = :pacienteId", Paciente.class)
-                .setParameter("agendamentoId", agendamentoId)
-                .setParameter("pacienteId", pacienteId)
-                .getSingleResult();
-
-    }
+//    @Override
+//    public Paciente recuperarPorAgendamentoIdEPacienteId(long agendamentoId, long pacienteId) {
+//        return em.createQuery("select m from Paciente m where m.agendamento.id = :agendamentoId and m.id = :pacienteId", Paciente.class)
+//                .setParameter("agendamentoId", agendamentoId)
+//                .setParameter("pacienteId", pacienteId)
+//                .getSingleResult();
+//
+//    }
 
     @Override
     public void atualizar(Paciente paciente) {
@@ -43,4 +43,16 @@ public class PacienteDaoImpl implements PacienteDao {
     public void excluir(long pacienteId) {
         em.remove(em.getReference(Paciente.class, pacienteId));
     }
+
+    @Override
+    public Paciente recuperarPorID(long id) {
+        return em.find(Paciente.class, id);
+    }
+
+    @Override
+    public List<Paciente> recuperar() {
+        return  em.createQuery("select p from Paciente p", Paciente.class).getResultList();
+    }
+
+
 }

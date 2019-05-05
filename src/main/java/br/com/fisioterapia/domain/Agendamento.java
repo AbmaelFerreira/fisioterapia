@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name="agendamento")
@@ -22,9 +23,6 @@ public class Agendamento implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotNull
-    @Column(nullable = false)
-    private int id_pacientes;
 
 
     @Column(name = "agendamento_data")
@@ -32,16 +30,10 @@ public class Agendamento implements Serializable{
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Calendar data;
 
-
-//
-//    @Column(name = "agendamento_data", columnDefinition = "DATE")
-//    @NotNull(message = "Informe a data do agendamento.")
-//    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-//    private LocalDate data;
-
     @NotNull
     @Column(nullable = false)
     private int controle;
+
 
     @NotBlank
     @Column(nullable = false)
@@ -53,10 +45,12 @@ public class Agendamento implements Serializable{
 
     @NotNull
     @Column(name = "plano_saude", nullable = false)
-    private int planoSaude;
+    private int planosaude;
 
 
-
+    @ManyToOne //Leitura Muitos agendamentos para 1 paciente
+    @JoinColumn(name = "paciente")
+    private Paciente paciente;
 
 
 
@@ -74,28 +68,29 @@ public class Agendamento implements Serializable{
         this.id = id;
     }
 
-    public int getId_pacientes() {
-        return id_pacientes;
+    public Paciente getPaciente() {
+        return paciente;
     }
 
-    public void setId_pacientes(int id_pacientes) {
-        this.id_pacientes = id_pacientes;
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
     }
 
-//    public LocalDate getData() {
-//        return data;
-//    }
-//
-//    public void setData(LocalDate data) {
-//        this.data = data;
-//    }
 
-        public Calendar getData() {
+    public Calendar getData() {
         return data;
     }
 
-        public void setData(Calendar data) {
+    public void setData(Calendar data) {
         this.data = data;
+    }
+
+    public int getPlanosaude() {
+        return planosaude;
+    }
+
+    public void setPlanosaude(int planosaude) {
+        this.planosaude = planosaude;
     }
 
     public int getTipopaciente() {
@@ -122,11 +117,23 @@ public class Agendamento implements Serializable{
         this.situacao = situacao;
     }
 
-    public int getPlanoSaude() {
-        return planoSaude;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Agendamento)) return false;
+        Agendamento that = (Agendamento) o;
+        return getId() == that.getId();
     }
 
-    public void setPlanoSaude(int planoSaude) {
-        this.planoSaude = planoSaude;
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
+
+    @Override
+    public String toString() {
+        return "Agendamento{" +
+                "id=" + id +
+                '}';
     }
 }

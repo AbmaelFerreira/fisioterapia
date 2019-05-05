@@ -83,6 +83,32 @@ CHANGE COLUMN `financeiro` `tipopaciente` INT(11) NOT NULL ;
 
 
 
+	ALTER TABLE paciente 
+   ADD COLUMN agendamento int;
+   
+      
+   ALTER TABLE paciente 
+   FOREIGN KEY (agendamento)
+   REFERENCES agendamento(id)
+
+ALTER TABLE `fisioterapia`.`agendamento` 
+CHANGE COLUMN `id_pacientes` `nome_paciente` VARCHAR(40) NOT NULL ;
+
+ALTER TABLE `fisioterapia`.`paciente` 
+DROP COLUMN `agendamento`;
+
+
+
+alter table paciente drop foreign key paciente_ibfk_1
+
+
+
+
+
+
+
+
+
 
 
 

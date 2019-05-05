@@ -2,6 +2,8 @@ package br.com.fisioterapia.controller;
 
 import br.com.fisioterapia.domain.Agendamento;
 import br.com.fisioterapia.service.AgendamentoService;
+
+import br.com.fisioterapia.service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -19,11 +21,18 @@ public class AgendamentoController  {
     @Autowired
     private AgendamentoService agendamentoService;
 
-        /*Esse metodo lista todas os agendamentos cadastradas*/
+    //@Autowired
+    //private PacienteService pacienteService;
+
+
+
+    /*Esse metodo lista todas os agendamentos cadastradas*/
         @GetMapping("/listar")
         public ModelAndView listar(ModelMap model){
+
                    model.addAttribute("agendamentos", agendamentoService.recuperar());
-                 return  new ModelAndView("/agendamento/list", model);
+            //model.addAttribute("pacientes", pacienteService.recuperar());
+                  return  new ModelAndView("/agendamento/list", model);
         }
 
         /*Esse metodo redireciona para a pagina onde será adicionado as listas*/

@@ -7,12 +7,16 @@ import java.util.List;
 public interface PacienteDao {
 
     void salvar(Paciente paciente);
-
-    List<Paciente> recuperarPorAgendamento(long agendamentoId);
-
-    Paciente recuperarPorAgendamentoIdEPacienteId (long agendamentoId, long pacienteId);
     void atualizar(Paciente paciente);
     void excluir(long pacienteId);
+
+    Paciente recuperarPorID(long id);
+    List<Paciente> recuperar();
+
+
+    //List<Paciente> recuperarPorAgendamento(long agendamentoId);
+
+//    Paciente recuperarPorAgendamentoIdEPacienteId (long agendamentoId, long pacienteId);
 
 
 }
