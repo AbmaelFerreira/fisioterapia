@@ -21,6 +21,11 @@ public class PacienteServiceImpl implements PacienteService {
     }
 
 
+    @Transactional(readOnly = true)
+    public List<Paciente> recuperar(){
+         return pacienteDao.recuperar();
+    }
+
 
 //    @Override
 //    public void salvar(Paciente paciente, long agendamentoId) {

@@ -23,6 +23,9 @@ public class Agendamento implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @ManyToOne //Leitura Muitos agendamentos para 1 paciente
+    @JoinColumn(name = "paciente")
+    private Paciente paciente;
 
 
     @Column(name = "agendamento_data")
@@ -32,7 +35,7 @@ public class Agendamento implements Serializable{
 
     @NotNull
     @Column(nullable = false)
-    private int controle;
+    private String controle;
 
 
     @NotBlank
@@ -41,16 +44,14 @@ public class Agendamento implements Serializable{
 
     @NotNull
     @Column(nullable = false)
-    private int tipopaciente;
+    private String tipopaciente;
 
     @NotNull
     @Column(name = "plano_saude", nullable = false)
-    private int planosaude;
+    private String planosaude;
 
 
-    @ManyToOne //Leitura Muitos agendamentos para 1 paciente
-    @JoinColumn(name = "paciente")
-    private Paciente paciente;
+
 
 
 
@@ -85,27 +86,27 @@ public class Agendamento implements Serializable{
         this.data = data;
     }
 
-    public int getPlanosaude() {
+    public String getPlanosaude() {
         return planosaude;
     }
 
-    public void setPlanosaude(int planosaude) {
+    public void setPlanosaude(String planosaude) {
         this.planosaude = planosaude;
     }
 
-    public int getTipopaciente() {
+    public String getTipopaciente() {
         return tipopaciente;
     }
 
-    public void setTipopaciente(int tipopaciente) {
+    public void setTipopaciente(String tipopaciente) {
         this.tipopaciente = tipopaciente;
     }
 
-    public int getControle() {
+    public String getControle() {
         return controle;
     }
 
-    public void setControle(int controle) {
+    public void setControle(String controle) {
         this.controle = controle;
     }
 

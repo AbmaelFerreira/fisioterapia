@@ -1,6 +1,7 @@
 package br.com.fisioterapia.controller;
 
 import br.com.fisioterapia.domain.Agendamento;
+import br.com.fisioterapia.domain.Paciente;
 import br.com.fisioterapia.service.AgendamentoService;
 
 import br.com.fisioterapia.service.PacienteService;
@@ -21,6 +22,9 @@ public class AgendamentoController  {
     @Autowired
     private AgendamentoService agendamentoService;
 
+    @Autowired
+    private PacienteService pacienteService;
+
     //@Autowired
     //private PacienteService pacienteService;
 
@@ -31,15 +35,26 @@ public class AgendamentoController  {
         public ModelAndView listar(ModelMap model){
 
                    model.addAttribute("agendamentos", agendamentoService.recuperar());
-            //model.addAttribute("pacientes", pacienteService.recuperar());
-                  return  new ModelAndView("/agendamento/list", model);
+                  //model.addAttribute("pacientes", pacienteService.recuperar());
+                         return  new ModelAndView("/agendamento/list", model);
         }
 
         /*Esse metodo redireciona para a pagina onde será adicionado as listas*/
-        @GetMapping("/cadastro")
-        public String preSalvar(@ModelAttribute("agendamento" ) Agendamento agendamento){
-            return "/agendamento/add";
-        }
+//        @GetMapping("/cadastro")
+//        public String preSalvar(@ModelAttribute("agendamento" ) Agendamento agendamento)
+//        {
+//
+//
+//            return "/agendamento/add";
+//        }
+
+    @GetMapping("/cadastro")
+    public ModelAndView preSalvar( ModelMap model){
+        Agendamento agendamento = new Agendamento();
+        model.addAttribute("pacientes", pacienteService.recuperar());
+        model.addAttribute("agendamento", agendamento);
+        return  new ModelAndView("/agendamento/add", model);
+    }
 
 
         /*Esse metodo salva no banco de dados os dados inseridos nos inputs*/
@@ -81,15 +96,6 @@ public class AgendamentoController  {
         attr.addFlashAttribute("mensagem", "Agendamento excluída com sucesso.");
         return "redirect:/agendamentos/listar";
     }
-
-
-
-
-
-//    @ModelAttribute("pacientes")
-//    public TipoSexo[] tipoSexo() {
-//        return TipoSexo.values();
-//    }
 
 
 

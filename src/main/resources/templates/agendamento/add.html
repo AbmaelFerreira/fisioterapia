@@ -1,14 +1,15 @@
+<!DOCTYPE html>
 <html  lang="pt-br" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, user-scalable=no"/>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, user-scalable=no"/>
 
 
-    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}" />
-    <link rel="shortcut icon" th:href="@{/images/favicon.ico}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
-    <title>Novo agendamento</title>
-</head>
+        <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}" />
+        <link rel="shortcut icon" th:href="@{/images/favicon.ico}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
+        <title>Novo agendamento</title>
+    </head>
 
 <body>
 <header>
@@ -54,7 +55,7 @@
 
 </header>
 
-<main>
+<main style="margin: 20px;">
 
     <h4>
         Novo agendamento
@@ -64,22 +65,26 @@
 
         <div class="row">
             <input id="id" type="hidden" th:field="*{id}"/>
+
+            <!--<div class="form-group col-md-4">-->
+                <!--<label for="id_pacientes">Paciente</label>-->
+                <!--<input class="form-control" id="id_pacientes" type="numeric" th:field="*{id_pacientes}"/>-->
+                <!--<span th:if="${#fields.hasErrors('id_pacientes')}" th:errors="*{id_pacientes}" class="label label-danger"></span>-->
+            <!--</div>-->
+
             <div class="form-group col-md-4">
-                <label for="id_pacientes">Paciente</label>
-                <input class="form-control" id="id_pacientes" type="numeric" th:field="*{id_pacientes}"/>
-                <span th:if="${#fields.hasErrors('id_pacientes')}" th:errors="*{id_pacientes}" class="label label-danger"></span>
+                <label th:for="paciente">Paciente: </label>
+                <select th:field="*{paciente}" class="form-control" id="paciente" >
+                    <!--<option th:value="Selecione o Paciente" th:text="Selecione o Paciente" >Selecione o Paciente</option>-->
+                    <option th:each="paciente : ${pacientes}" th:value="${paciente.id}" selected="selected" th:text="${paciente.nome}" >Paciente</option><!--th:text="#{|paciente.${paciente.nome}|}"-->
+
+                </select>
             </div>
 
             <div class="form-group col-md-8">
                 <label for="data">Data Agendamento:</label>
                 <input class="form-control" id="data" type="date" th:field="*{data}"/>
                 <span th:if="${#fields.hasErrors('data')}" th:errors="*{data}" class="label label-danger"></span>
-            </div>
-
-            <div class="form-group col-md-8">
-                <label for="planoSaude">Plano de Saúde:</label>
-                <input class="form-control" id="planoSaude" type="text" th:field="*{planoSaude}"/>
-                <span th:if="${#fields.hasErrors('planoSaude')}" th:errors="*{planoSaude}" class="label label-danger"></span>
             </div>
 
             <div class="form-group col-md-8">
@@ -100,6 +105,11 @@
                 <span th:if="${#fields.hasErrors('tipopaciente')}" th:errors="*{tipopaciente}" class="label label-danger"></span>
             </div>
 
+            <div class="form-group col-md-8">
+                <label for="planosaude">Plano de Saúde:</label>
+                <input class="form-control" id="planosaude" type="text" th:field="*{planosaude}"/>
+                <span th:if="${#fields.hasErrors('planosaude')}" th:errors="*{planosaude}" class="label label-danger"></span>
+            </div>
 
         </div>
         <div class="form-group">
@@ -114,7 +124,7 @@
 </main>
 
 <footer class="footer">
-        <p>© 2018 Abmael Ferreira</p>
+        <p>© 2019 Abmael Ferreira</p>
 </footer>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
